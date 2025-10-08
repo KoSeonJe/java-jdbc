@@ -25,8 +25,7 @@ public abstract class AbstractDao<T extends Entity> {
     protected abstract RowMapper<T> getRowMapper();
     protected abstract String[] getAllColumnNames();
     protected abstract String[] getNonIdColumnNames();
-    protected abstract Object[] toInsertParams(T entity);
-    protected abstract Object[] toUpdateParams(T entity);
+    protected abstract Object[] toUpdateAllParams(T entity);
 
     public Optional<T> findById(Long id) {
         String columns = String.join(", ", getAllColumnNames());
@@ -45,7 +44,7 @@ public abstract class AbstractDao<T extends Entity> {
         String placeholders = String.join(", ", Collections.nCopies(getNonIdColumnNames().length, "?"));
         String sql = String.format("INSERT INTO %s (%s) VALUES (%s)",
                 getTableName(), columns, placeholders);
-        jdbcTemplate.update(sql, toInsertParams(entity));
+        jdbcTemplate.update(sql, toUpdateAllParams(entity));
     }
 
     public void update(T entity) {
@@ -55,7 +54,7 @@ public abstract class AbstractDao<T extends Entity> {
                 .collect(Collectors.joining(", "));
         String sql = String.format("UPDATE %s SET %s WHERE id = ?", getTableName(), caluse);
 
-        Object[] updateParams = toUpdateParams(entity);
+        Object[] updateParams = toUpdateAllParams(entity);
         Object[] updateParamsWithId = Arrays.copyOf(updateParams, updateParams.length + 1);
         updateParamsWithId[updateParams.length] = entity.getId();
 

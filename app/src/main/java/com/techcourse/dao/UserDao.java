@@ -46,12 +46,7 @@ public class UserDao extends AbstractDao<User> {
     }
 
     @Override
-    protected Object[] toInsertParams(final User entity) {
-        return new Object[]{entity.getAccount(), entity.getPassword(), entity.getEmail()};
-    }
-
-    @Override
-    protected Object[] toUpdateParams(final User entity) {
+    protected Object[] toUpdateAllParams(final User entity) {
         return new Object[]{entity.getAccount(), entity.getPassword(), entity.getEmail()};
     }
 
