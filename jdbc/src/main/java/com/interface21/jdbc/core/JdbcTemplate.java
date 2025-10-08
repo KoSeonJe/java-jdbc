@@ -21,7 +21,7 @@ public class JdbcTemplate {
         this.dataSource = dataSource;
     }
 
-    private <T> T execute(String sql, PreparedStatementCallback<T> action, Object... args) {
+    public <T> T execute(String sql, PreparedStatementCallback<T> action, Object... args) {
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             log.debug("query : {}", sql);
