@@ -1,6 +1,8 @@
 package com.techcourse.domain;
 
-public class User {
+import com.interface21.dao.Entity;
+
+public class User implements Entity {
 
     private Long id;
     private final String account;
@@ -32,7 +34,8 @@ public class User {
         return account;
     }
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
