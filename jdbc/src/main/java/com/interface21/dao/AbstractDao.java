@@ -44,7 +44,7 @@ public abstract class AbstractDao<T extends Entity> {
         String placeholders = String.join(", ", Collections.nCopies(getNonIdColumnNames().length, "?"));
         String sql = String.format("INSERT INTO %s (%s) VALUES (%s)",
                 getTableName(), columns, placeholders);
-        jdbcTemplate.update(sql, toUpdateAllParams(entity));
+        jdbcTemplate.query(sql, toUpdateAllParams(entity));
     }
 
     public void update(T entity) {
@@ -58,6 +58,6 @@ public abstract class AbstractDao<T extends Entity> {
         Object[] updateParamsWithId = Arrays.copyOf(updateParams, updateParams.length + 1);
         updateParamsWithId[updateParams.length] = entity.getId();
 
-        jdbcTemplate.update(sql, updateParamsWithId);
+        jdbcTemplate.query(sql, updateParamsWithId);
     }
 }

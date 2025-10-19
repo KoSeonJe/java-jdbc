@@ -1,8 +1,9 @@
 package com.techcourse.domain;
 
+import com.interface21.dao.Entity;
 import java.time.LocalDateTime;
 
-public class UserHistory {
+public class UserHistory implements Entity {
 
     private Long id;
 
@@ -29,6 +30,18 @@ public class UserHistory {
         this.createBy = createBy;
     }
 
+    public UserHistory(final Long id, final long userId, final String account, final String password, final String email, final LocalDateTime createdAt, final String createBy) {
+        this.id = id;
+        this.userId = userId;
+        this.account = account;
+        this.password = password;
+        this.email = email;
+        this.createdAt = createdAt;
+        this.createBy = createBy;
+    }
+
+
+    @Override
     public Long getId() {
         return id;
     }

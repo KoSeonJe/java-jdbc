@@ -4,6 +4,7 @@ import com.interface21.dao.AbstractDao;
 import com.interface21.jdbc.core.RowMapper;
 import com.techcourse.domain.User;
 import com.interface21.jdbc.core.JdbcTemplate;
+import java.util.Arrays;
 import java.util.Optional;
 
 import javax.sql.DataSource;
@@ -42,7 +43,9 @@ public class UserDao extends AbstractDao<User> {
 
     @Override
     protected String[] getNonIdColumnNames() {
-        return new String[]{"account", "password", "email"};
+        return Arrays.stream(getAllColumnNames())
+                .filter(column -> !column.equals("id"))
+                .toArray(String[]::new);
     }
 
     @Override
