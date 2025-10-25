@@ -15,6 +15,7 @@ public class TxUserService implements UserService {
         this.appUserService = appUserService;
     }
 
+    @Override
     public User findById(final long id) {
         return appUserService.findById(id);
     }
@@ -24,6 +25,7 @@ public class TxUserService implements UserService {
         appUserService.save(user);
     }
 
+    @Override
     public void changePassword(final long id, final String newPassword, final String createBy) {
         customTransactionManager.executeTransaction(() -> {
             appUserService.changePassword(id, newPassword, createBy);

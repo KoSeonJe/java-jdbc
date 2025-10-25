@@ -16,6 +16,7 @@ public class AppUserService implements UserService {
         this.userHistoryDao = userHistoryDao;
     }
 
+    @Override
     public User findById(final long id) {
         return userDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id로 사용자를 찾을 수 없습니다."));
@@ -26,6 +27,7 @@ public class AppUserService implements UserService {
         userDao.insert(user);
     }
 
+    @Override
     public void changePassword(final long id, final String newPassword, final String createBy) {
             final var user = findById(id);
             user.changePassword(newPassword);
