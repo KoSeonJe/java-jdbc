@@ -27,7 +27,7 @@ public abstract class DataSourceUtils {
 
     public static void releaseConnection(Connection connection, DataSource dataSource) {
         if (TransactionSynchronizationManager.isActiveTransaction(dataSource)) {
-            TransactionSynchronizationManager.unbindResource(dataSource);
+            throw new IllegalStateException();
         }
         try {
             connection.close();
