@@ -1,10 +1,8 @@
 package com.techcourse.service;
 
+import com.techcourse.support.jdbc.CustomTransactionManager;
 import com.techcourse.config.DataSourceConfig;
-import com.techcourse.dao.UserDao;
-import com.techcourse.dao.UserHistoryDao;
 import com.techcourse.domain.User;
-import com.techcourse.domain.UserHistory;
 
 public class TxUserService implements UserService {
 
